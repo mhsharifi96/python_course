@@ -9,6 +9,9 @@ from tutproject.constants import  PORITY_TASK,STATUS_TASK,TYPE_TASK
 # Making queries
 # https://docs.djangoproject.com/en/3.2/topics/db/queries/
 
+
+
+
 class taskModels(models.Model):
     
     # user
@@ -29,6 +32,9 @@ class taskModels(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # updated_at
     updated_at = models.DateTimeField(auto_now=True)
+
+
+   
 
     def __str__(self):
         return self.title
@@ -98,7 +104,7 @@ class taskperiodModel(models.Model  ):
 
 
 
-
+# extra feature
 
 class testFieldsMoels(models.Model):
     
@@ -107,12 +113,19 @@ class testFieldsMoels(models.Model):
     constant  = models.CharField(max_length=500,db_column='constantTest',editable=False,default='constant field')
     error_messages  = models.CharField(max_length=500,error_messages={'blank': 'نکن این کار رو با ما', 'null': 'چشم'})
     help_text = models.CharField(max_length=500,help_text="این متن برای کمک به توفقط والا")
-    help_text = models.CharField(max_length=500,verbose_name="توضیح اضافی")
+    verbose_name = models.CharField(max_length=500,verbose_name="توضیح اضافی")
     dateFeild = models.DateField(blank=True,null=True)
     DateTimeField = models.DateTimeField(blank=True,null=True)
     slug = models.SlugField()
 
     # unique ,primary_key
+    class Meta :
+        # ref : https://docs.djangoproject.com/en/3.2/ref/models/options/#ordering  
+        ordering = ['DateTimeField']
+        # unique_together = ['help_text', 'verbose_name']
+        # index_together = ["slug", "name"]
+        verbose_name = 'تست فیلد'
+        verbose_name_plural = 'تست فیلدها'
 
     # show error on error_message 
     #  run python manage.py shell 
@@ -127,4 +140,28 @@ class testFieldsMoels(models.Model):
 
 
 # ManyToManyField
+
+# class Person(models.Model):
+#     name = models.CharField(max_length=50)
+
+# class Group(models.Model):
+#     name = models.CharField(max_length=128)
+#     members = models.ManyToManyField(
+#         Person,
+#         through='Membership',
+#         through_fields=('group', 'person'),
+#     )
+
+# class Membership(models.Model):
+#     group = models.ForeignKey(Group, on_delete=models.CASCADE)
+#     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+#     inviter = models.ForeignKey(
+#         Person,
+#         on_delete=models.CASCADE,
+#         related_name="membership_invites",
+#     )
+#     invite_reason = models.CharField(max_length=64)
+
+
 # OneToOne
+
