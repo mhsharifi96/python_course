@@ -1,14 +1,15 @@
 # python_course
 
+# لینک های مفید
 
-# Model field reference
-https://docs.djangoproject.com/en/3.2/ref/models/fields/
+## Model field reference
+[fields](https://docs.djangoproject.com/en/3.2/ref/models/fields/)
 
-# انواع کوئری ها
- https://docs.djangoproject.com/en/3.2/topics/db/queries/
+## انواع کوئری ها
+[queries](https://docs.djangoproject.com/en/3.2/topics/db/queries/)
 
-# آموزش کار با aggrigate , annotate
- https://docs.djangoproject.com/en/3.1/topics/db/aggregation/
+## آموزش کار با aggrigate , annotate
+[aggregation](https://docs.djangoproject.com/en/3.1/topics/db/aggregation/)
 
-# مثال های manytomany
- https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/
+## مثال های manyTomany
+[many_to_many](https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/)
