@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% load static %}
+
+{% block title %}تسک دونی{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+
+    {% comment %} <div class="row text-center">
+        <div class="col">
+            <div style="padding-top: 10px;">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTask"
+                    style="border-radius: 40px;">
+                    + Add a new Task
+                </button>
+            </div>
+        </div>
+    </div> {% endcomment %}
+</div>
+<div class="col-md-12" style="margin-top: 10px;"></div>
+<div class="row">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col">
+                <label for="">عنوان</label>
+                <input type="text" name="title" class="form-control" placeholder="title">
+            </div>
+            <div class="col">
+                <label for="">توضیحات</label>
+                <input type="text"  name="description" class="form-control" placeholder="description">
+            </div>
+            <div class="col">
+                <label for="">اهمیت</label>
+                <select id="inputState" name="priority" class="form-control">
+                    <option value="adanger" selected>بالا</option>
+                    <option value="bwarning">متوسط</option>
+                    <option value="csuccess">کم</option>
+                  </select>
+            </div>
+            <div class="col" style="margin-top: 30px;">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+  
+
+<!-- Add note Modal -->
+<div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-labelledby="addTaskTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    {% if form %}
+
+                    <div class="col text-center" style="padding: 30px;">
+                        <form method="POST" action="{% url 'tasks' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col text-center">
+                                    {{ form.title | add_css:"form-control" }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col text-center">
+                                    {{ form.description | add_css:"form-control" }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7">
+                                    {{ form.priority | add_css:"form-control" }}
+                                </div>
+                                <div class="col-5">
+                                    <div class="btn-group float-right" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-1 col-md-1"></div>
+    <div class="col-lg-10 col-md-10">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">title</th>
+                    <th scope="col">description</th>
+                    <th scope="col">priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{task.title}}</td>
+                    <td>{{task.description}}</td>
+                    <td>{{task.priority}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-1 col-md-1"></div>
+</div>
+
+<div class="text-center" style="position: fixed;bottom: 0;">
+    Made with &#x2615; and &#9829; by <strong><a href="https://www.github.com/mhsharifi96"
+            target="_blank">Virux</a></strong>
+
+
+
+
+
+    © . All rights reserved.
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+{% endblock %}

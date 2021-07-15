@@ -52,4 +52,3 @@ def CreateTodo1(request):
 
 
 
-

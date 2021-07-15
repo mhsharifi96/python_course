@@ -13,17 +13,38 @@ from tutproject.constants import  PORITY_TASK,STATUS_TASK,TYPE_TASK
 
 
 class taskModels(models.Model):
+
+    PORITY_TASK = [
+    (0, 'بی اهمیت'),
+    (1, 'کم اهمیت'),
+    (2, 'توجه'),
+    (3, 'قابل توجه'),
+    (4, 'مهم'),
+    (5, 'ضروری'),
+    ]
+    ENABLE = "enable"
+    STATUS_TASK = [
+        ('disable', 'غیرفعال'),
+        (ENABLE, 'فعال'),
+        ('doing', 'در حال انجام'),
+        ('done', 'انجام شده'),
+        ('expire', 'منقضی'),
+        ('archive', 'ارشیو'),
+        ('unkown', 'بی سرپرست'),
+    ]
     
-    # user
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # # user
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     # title
+    
     title = models.CharField(max_length=250)
     # description
     description = models.TextField()
     # pority 1
     pority = models.IntegerField(choices=PORITY_TASK,default=4)
     # status
-    status = models.CharField(max_length=10,choices=STATUS_TASK,default="enable")
+    status = models.CharField(max_length=10,choices=STATUS_TASK,default=ENABLE)
+   
     # type ? reminder or task
     type_task = models.CharField(max_length=10,choices=TYPE_TASK,default="task")
     # expire_date
@@ -39,7 +60,6 @@ class taskModels(models.Model):
     def __str__(self):
         return self.title
     
-
 
 
 
@@ -94,10 +114,12 @@ class group_taskModels(models.Model):
 
 class taskperiodModel(models.Model  ):
     pass 
-    # task
-    # startdate
-    # end date
-    # period time
+    # task task3
+    # startdate today
+    # end date 1year
+    # period time 2
+    
+    
     # status
     # created_at
     # updated_at
@@ -140,9 +162,16 @@ class testFieldsMoels(models.Model):
 
 
 # ManyToManyField
+class person(models.Model):
+    name = models.CharField(max_length=10)
+    lastName = models.CharField(max_length=10)
+    phoneNumber = models.CharField(max_length=10)
+    address = models.CharField(max_length=10)
 
-# class Person(models.Model):
-#     name = models.CharField(max_length=50)
+
+class groupPerson(models.Model):
+    person = models.ManyToManyField(person,related_name="persons")
+
 
 # class Group(models.Model):
 #     name = models.CharField(max_length=128)

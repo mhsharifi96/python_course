@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% load static %}
+
+{% block title %}تسک دونی{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="row text-center">
+            <div class="col">
+                <img src="{% static 'images/dexter.gif' %}" height="300px" alt="dexter">
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <div style="padding-top: 10px;">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addTask" style="border-radius: 40px;">
+                      + Add a new Task
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add note Modal -->
+    <div class="modal fade" id="addTask" tabindex="-1" role="dialog" aria-labelledby="addTaskTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="row">
+                {% if form %}
+                
+                <div class="col text-center" style="padding: 30px;">
+                    <form method="POST" action="{% url 'tasks' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col text-center">
+                                {{ form.title | add_css:"form-control" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col text-center">
+                                {{ form.description | add_css:"form-control" }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-7">
+                                {{ form.priority | add_css:"form-control" }}
+                            </div>
+                            <div class="col-5">
+                                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-lg-3 col-md-3"></div>
+        <div class="col-lg-6 col-md-6">
+            {% for task in tasks %}
+                <div class="card btn-block" style="margin-top: 10px; border-radius: 0px; padding: 10px; background-color: #fafafa">
+                    <div class="row">
+                        <div class="col-9">
+                            <a href="" data-toggle="collapse" data-target="#{{ task.pk }}" style="text-decoration: none;{% if task.complete %}text-decoration:line-through{% endif %}" class="{{ task.priority }}">{{ task.title }}</a>
+
+                            {% if task.description %}
+                                <div class="collapse" id="{{ task.pk }}">
+                                  <div class="" style="border-radius: 0;">
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ task.description }}
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-3">
+                            <div class="btn-group float-right" role="group">
+                                <a href="{% url 'completed_task' task.pk %}" class="float-right" data-toggle="tooltip" title="{% if task.complete %} Mark as Incomplete {% else %} Mark as Complete {% endif %}">&#10004;</a>
+                                <a href="{% url 'delete_task' task.pk %}" class="float-right" style="padding-left: 10px;" data-toggle="tooltip" title="Delete">&#10007;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-2 col-md-2"></div>
+    </div>
+
+    <div class="text-center" style="padding-top: 20px;">
+        Made with &#x2615; and &#9829; by <strong><a href="https://www.github.com/mhsharifi96" target="_blank">Virux</a></strong> 
+
+    
+
+       
+
+        © . All rights reserved.
+    </div>
+{% endblock %}
+
+
+{% block javascript %}
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+{% endblock %}
