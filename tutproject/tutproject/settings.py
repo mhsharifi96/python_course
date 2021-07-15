@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo',
-    'advmodels'
+    'advmodels',
+    'blog',
 ]
 
 MIDDLEWARE = [
