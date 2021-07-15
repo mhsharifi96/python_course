@@ -7,7 +7,7 @@ from .forms import SimpleForm
 
 
 def CreateTodo(request):
-   
+    # برای ایجاد تسک جدید 
     if request.method == "POST" :
         # print('this is post method')
         # print(dict(request.POST.items()))
@@ -15,6 +15,7 @@ def CreateTodo(request):
         # print(request.POST['description'])
         form = SimpleForm(request.POST)
         if form.is_valid() :
+            # برای دریافت فرم
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             print('desc',description)
