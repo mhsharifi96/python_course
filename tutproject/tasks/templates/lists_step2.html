@@ -19,7 +19,19 @@
     </form>
      <form method="POST">
     {% csrf_token %}
-        {{form}}
+       
+        <div class="col">
+            <label for="{{ form.title.id_for_label }}">title</label>
+            {{ form.title }}
+        </div>
+        <div class="col">
+            <label for="{{ form.description.id_for_label }}">description</label>
+            {{ form.description }}
+        </div>
+        <div class="col">
+            <label for="{{ form.priority.id_for_label }}">priority</label>
+            {{ form.priority }}
+        </div>
          <button class="btn btn-primary" type="submit">Submit</button>
     </form>     
     

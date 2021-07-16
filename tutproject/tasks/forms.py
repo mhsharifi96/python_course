@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import Task
 
 from crispy_forms.helper import FormHelper
@@ -11,8 +10,8 @@ from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 # refrence link : https://www.geeksforgeeks.org/python-form-validation-using-django/ 
 
 class simpleForm(forms.Form):
-    title = forms.CharField(max_length=10)
-    description = forms.CharField( max_length=100,widget=forms.Textarea)
+    title = forms.CharField(max_length=10,widget=forms.TextInput(attrs={'class':'form-control'}))
+    description = forms.CharField(max_length=100,widget=forms.Textarea(attrs={'class':'form-control'}))
     PRIORITIES = (
         ('adanger', 'Priority High'),
         ('bwarning', 'Priority Medium'),
@@ -103,18 +102,19 @@ class ExampleForm(forms.Form):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = '__all__'
+        # fields = ['title','description','priority']
+        fields= '__all__'
         exclude = ['complete', 'date_of_creation', ]
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': "What's on your mind today?"}),
             'description': forms.Textarea(attrs={'placeholder': "Describe your task ..", 'cols': 80, 'rows': 3}),
         }
-    def clean_title(self):
-        super(TaskForm, self).clean() 
-        title = self.cleaned_data.get('title')
-        if len(title) < 5:
-            self._errors['title'] = self.error_class([
-                'اینم فارسی که خیالت راحت شه'])
+    # def clean_title(self):
+    #     super(TaskForm, self).clean() 
+    #     title = self.cleaned_data.get('title')
+    #     if len(title) < 5:
+    #         self._errors['title'] = self.error_class([
+    #             'اینم فارسی که خیالت راحت شه'])
 
     def clean(self):
         # data from the form is fetched using super function

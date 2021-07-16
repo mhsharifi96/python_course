@@ -59,6 +59,9 @@ def complete(request, id):
 # برای اجرای این قسمت هر استپ را ازکامنت بیرون آورید و سایر استپ ها رو کامنت کنید 
 # """
 
+# START OF STEP
+
+
 # without form
 # start step 1
 # class TasksView(View):
@@ -82,65 +85,65 @@ def complete(request, id):
 
 # # use forms.Form
 # #step 2
-# class TasksView(View):
+class TasksView(View):
 
-#     def get(self,request,*args, **kwargs):
-#         form = TaskManualForm()
-#         # form = ExampleForm()
-#         print('this get page')
-#         tasks = Task.objects.all()
-#         return render(request,'lists_step2.html',{'tasks': tasks,'form':form})
+    def get(self,request,*args, **kwargs):
+        form = TaskManualForm()
+        # form = ExampleForm()
+        print('this get page')
+        tasks = Task.objects.all()
+        return render(request,'lists_step2.html',{'tasks': tasks,'form':form})
 
-#     def post(self,request,*args, **kwargs):
+    def post(self,request,*args, **kwargs):
 
-#         print(dict(request.POST.items()))
-#         form = TaskManualForm(request.POST)
-#         if form.is_valid() :
-#             print('its ok')
-#             print(form.cleaned_data['title'])
-#             print(form.cleaned_data['description'])
-#             print(form.cleaned_data['priority'])
-#             #   save cleaned_data .....   
-#             return HttpResponse("hooorrraaaa")
-#             # return redirect(reverse('tasks_list'))
-#         else :  return JsonResponse(form.errors)
+        print(dict(request.POST.items()))
+        form = TaskManualForm(request.POST)
+        if form.is_valid() :
+            print('its ok')
+            print(form.cleaned_data['title'])
+            print(form.cleaned_data['description'])
+            print(form.cleaned_data['priority'])
+            #   save cleaned_data .....   
+            return HttpResponse("hooorrraaaa")
+            # return redirect(reverse('tasks_list'))
+        else :  return JsonResponse(form.errors)
 
 
-#         return HttpResponse("this is post method on taskView")
+        return HttpResponse("this is post method on taskView")
 
 # # end step 2
 
 
 # use forms.Models
 #step 3
-class TasksView(View):
+# class TasksView(View):
 
-    def get(self,request,*args, **kwargs):
-        form = TaskForm()
+#     def get(self,request,*args, **kwargs):
+#         form = TaskForm() #MODEL FORM
         
-        tasks = Task.objects.all()
-        return render(request,'lists_step2.html',{'tasks': tasks,'form':form})
+#         tasks = Task.objects.all()
+#         return render(request,'lists_step2.html',{'tasks': tasks,'form':form})
 
-    def post(self,request,*args, **kwargs):
+#     def post(self,request,*args, **kwargs):
 
-        
-        form = TaskForm(request.POST)
-        if form.is_valid() :
-            print('its ok')
-            print(form.cleaned_data['title'])
-            print(form.cleaned_data['description'])
-            print(form.cleaned_data['priority'])
-            form.save()
-            # return HttpResponse("hooorrraaaa")
-            return redirect(reverse('tasks_list'))
-        else :  return JsonResponse(form.errors)
+#         form = TaskForm(request.POST)
+#         if form.is_valid() :
+#             print('its ok')
+#             print(form.cleaned_data['title'])
+#             print(form.cleaned_data['description'])
+#             print(form.cleaned_data['priority'])
+#             form.save()
+#             # return HttpResponse("hooorrraaaa")
+#             return redirect(reverse('tasks_list'))
+#         else :  return JsonResponse(form.errors)
 
 
-        return HttpResponse("this is post method on taskView")
+#         return HttpResponse("this is post method on taskView")
 
 # end step 3
 
-
+#  end of steps 
+# ############################################
 
 # این صفحه یه باگ کوچولو داره صفحه بندی داره ولی صفحه بندی اعمال نمیشه باید چکار کنیم تا درست بشه ؟
 def sample_paginator(request):
@@ -194,9 +197,9 @@ def maktabsample(request):
 
 
 def simple(request):
+    form = simpleForm(request.POST or None)
     if request.method == 'POST':
         print(dict(request.POST.items()))
-        form = simpleForm(request.POST)
         print(form.is_valid())
         if form.is_valid() :
             print('hooooraaa')
@@ -211,11 +214,11 @@ def simple(request):
 
         else : 
             print(form.cleaned_data)
-            print(form.errors)
+            print(form.errors) #TODO : show error on page 
             return HttpResponse("form not valid")
 
     else : 
 
-        form = simpleForm()
+        # form = simpleForm()
 
         return render(request, 'maktab51_form.html',{'form': form})
