@@ -1,12 +1,24 @@
+from django import forms
+
+from .models import Task
+
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
-from django import forms
-from .models import Task
 
 
 
 # Python | Form validation using django
 # refrence link : https://www.geeksforgeeks.org/python-form-validation-using-django/ 
+
+class simpleForm(forms.Form):
+    title = forms.CharField(max_length=10)
+    description = forms.CharField( max_length=100,widget=forms.Textarea)
+    PRIORITIES = (
+        ('adanger', 'Priority High'),
+        ('bwarning', 'Priority Medium'),
+        ('csuccess', 'Priority Low')
+    )
+    priority = forms.ChoiceField(choices=PRIORITIES)
 
 class TaskManualForm(forms.Form):
     def __init__(self, *args, **kwargs):

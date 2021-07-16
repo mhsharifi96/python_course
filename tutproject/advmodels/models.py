@@ -19,8 +19,8 @@ class Student(CommonInfo):
     home_group = models.CharField(max_length=5)
     
     #step2
-    class Meta(CommonInfo.Meta):
-        db_table = 'student_info'
+    # class Meta(CommonInfo.Meta):
+    #     db_table = 'student_info'
 
 
 # Multi-table inheritance
@@ -37,6 +37,8 @@ class Restaurant(Place):
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    def __str__(self):
+        return self.first_name
 
 class MyPerson(Person):
     class Meta:
@@ -45,6 +47,7 @@ class MyPerson(Person):
     # def do_something(self):
     #     # ...
     #     pass
+
 
 
 # Multiple inheritance

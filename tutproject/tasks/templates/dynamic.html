@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% crispy example_form example_form.helper %}
+
+{% load static %}
+
+{% block title %}مرحله دوم{% endblock %}
+
+{% block content %}
+
+<div class="col-md-12" style="margin-top: 10px;"></div>
+<div class="row">
+
+    <form method="post" class="form">
+        {% comment %} {{ form|crispy }} {% endcomment %}
+        {% comment %} {% crispy form %} {% endcomment %}
+
+    </form>
+     <form method="POST">
+    {% csrf_token %}
+        <input type="text" name="name">        
+        <input type="text" name="name">        
+        <input type="text" name="name">        
+        <input type="text" name="name">        
+        <input type="text" name="name">        
+        <input type="text" name="name">        
+        <input type="text" name="name">        
+         <button class="btn btn-primary" type="submit">Submit</button>
+    </form>     
+    
+</div>
+  
+
+<!-- Add note Modal -->
+
+
+<div class="row" style="margin-top: 10px;">
+    <div class="col-lg-1 col-md-1"></div>
+    <div class="col-lg-10 col-md-10">
+        <br>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">title</th>
+                    <th scope="col">description</th>
+                    <th scope="col">priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{task.title}}</td>
+                    <td>{{task.description}}</td>
+                    <td>{{task.priority}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-1 col-md-1"></div>
+</div>
+
+<div class="text-center" style="position: fixed;bottom: 0;">
+    Made with &#x2615; and &#9829; by <strong><a href="https://www.github.com/mhsharifi96"
+            target="_blank">Virux</a></strong>
+
+
+
+
+
+    © . All rights reserved.
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+{% endblock %}

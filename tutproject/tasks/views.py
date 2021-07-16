@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 from .models import  Task
-from .forms import TaskForm,TaskManualForm,ExampleForm
+from .forms import TaskForm,TaskManualForm,ExampleForm,simpleForm
 from django.template import RequestContext
 
 # Create your views here.
@@ -163,3 +163,59 @@ from django.views.generic import ListView
 # class ContactListView(ListView):
 #     paginate_by = 2
 #     model = Task
+
+
+def dynamic(request):
+    if request.method == "POST" : 
+        print(dict(request.POST.items()))
+    
+    return render(request, 'dynamic.html',{})
+
+
+
+
+def maktabsample(request):
+    if request.method == "POST" :
+        print('hooorrraaaa')
+        print(dict(request.POST.items()))
+        print(request.POST['title'])
+        print(request.POST['description'])
+        print(request.POST['priority'])
+        # if(len(request.POST['title']) > 10 or len(request.POST['descrition'])>100 ):
+        #     HttpResponse('طول تایتل یا دسک زیاده')
+        task = Task(title=request.POST['title'],description =request.POST['description'],priority=request.POST['priority'] )
+        task.save()
+        return HttpResponse("خدا خیرت بده سیو شد:)")
+
+
+    tasks = Task.objects.all()
+    return render(request, 'maktab51.html',{'tasks': tasks})
+
+
+
+def simple(request):
+    if request.method == 'POST':
+        print(dict(request.POST.items()))
+        form = simpleForm(request.POST)
+        print(form.is_valid())
+        if form.is_valid() :
+            print('hooooraaa')
+
+            print(form.cleaned_data['title'])
+            print(form.cleaned_data['description'])
+            print(form.cleaned_data['number'])
+            
+            # save data :)
+            return HttpResponse("دمت گرم !")
+            
+
+        else : 
+            print(form.cleaned_data)
+            print(form.errors)
+            return HttpResponse("form not valid")
+
+    else : 
+
+        form = simpleForm()
+
+        return render(request, 'maktab51_form.html',{'form': form})
