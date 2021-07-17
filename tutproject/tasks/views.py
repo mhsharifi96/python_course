@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from .models import  Task
 from .forms import TaskForm,TaskManualForm,ExampleForm,simpleForm
 from django.template import RequestContext
-
+import json
 # Create your views here.
 
 def tasks(request):
@@ -171,6 +171,9 @@ from django.views.generic import ListView
 def dynamic(request):
     if request.method == "POST" : 
         print(dict(request.POST.items()))
+        tasks = json.loads(request.POST['tasks'])
+        # print()
+        print(type(tasks))
     
     return render(request, 'dynamic.html',{})
 

@@ -11,67 +11,50 @@
 
 <div class="col-md-12" style="margin-top: 10px;"></div>
 <div class="row">
-
-    <form method="post" class="form">
-        {% comment %} {{ form|crispy }} {% endcomment %}
-        {% comment %} {% crispy form %} {% endcomment %}
-
-    </form>
-     <form method="POST">
-    {% csrf_token %}
-        <input type="text" name="name">        
-        <input type="text" name="name">        
-        <input type="text" name="name">        
-        <input type="text" name="name">        
-        <input type="text" name="name">        
-        <input type="text" name="name">        
-        <input type="text" name="name">        
-         <button class="btn btn-primary" type="submit">Submit</button>
-    </form>     
+    <div class="col-12">
+        <p>
+            داینامیک فرم ها
+        </p>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+              تسک
+            </div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="text"  class="form-control taskInput" placeholder="enter your task" aria-label="enter your task" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button id="taskBtn" class="btn btn-outline-primary" type="click">افزودن</button>
+                    </div>
+                </div>
+                <div class="card tasks" >
+                    <ul class="list-group list-group-flush">
+                        
+                        <!-- <li class="list-group-item">task
+                            <span class=" taskRemove btn btn-danger btn-sm float-right">X</span>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="col-12" style="margin-top: 10px;">
+                    <button id="taskSaveBtn" type="click" class="btn btn-success float-right btn-sm ">ذخیره سازی</button>
+                </div>
+             
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+          </div>
+    </div>
     
 </div>
   
 
-<!-- Add note Modal -->
+<!--  note  : https://docs.djangoproject.com/en/3.2/ref/csrf/ -->
+<!--  note  : https://stackoverflow.com/questions/7100294/json-post-with-customized-httpheader-field/7100389-->
 
-
-<div class="row" style="margin-top: 10px;">
-    <div class="col-lg-1 col-md-1"></div>
-    <div class="col-lg-10 col-md-10">
-        <br>
-        <br>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">title</th>
-                    <th scope="col">description</th>
-                    <th scope="col">priority</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in tasks %}
-                <tr>
-                    <th scope="row">{{forloop.counter}}</th>
-                    <td>{{task.title}}</td>
-                    <td>{{task.description}}</td>
-                    <td>{{task.priority}}</td>
-                </tr>
-                {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-1 col-md-1"></div>
-</div>
 
 <div class="text-center" style="position: fixed;bottom: 0;">
     Made with &#x2615; and &#9829; by <strong><a href="https://www.github.com/mhsharifi96"
             target="_blank">Virux</a></strong>
-
-
-
-
 
     © . All rights reserved.
 </div>
@@ -80,8 +63,49 @@
 
 {% block javascript %}
 <script>
+    tasks = {}
+    task_id = 1
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
+
+        $("#taskBtn").click(function(){
+           
+           console.log($('.taskInput').val())
+           task = $('.taskInput').val()
+           tasks[task_id] = task
+           $('.tasks ul').append('<li class="list-group-item">'+task+'<span item="'+task_id+'" class="taskRemove btn btn-danger btn-sm float-right">X</span></li>')
+           $('.taskInput').val('')
+           task_id ++
+           
+        }); 
+
+        // $(".taskRemove").click(function(){
+        //    console.log("button event active")           
+        // }); 
+
+        $(document).on("click",".taskRemove",function() {
+            item = $(this).attr('item')
+            console.log(this.closest('li'))
+            delete tasks[item]
+            this.closest('li').remove()
+        });
+        taskSaveBtn
+        
+        $(document).on("click","#taskSaveBtn",function() {
+
+            $.post( "{% url 'dynamic_list' %}",
+                {   
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                   
+                    "test":"test1",
+                    "tasks":JSON.stringify(tasks),
+                } ,function( data ) {
+                        $( ".result" ).html( data);
+                }
+            );
+        })
+        
+
     });
 </script>
 {% endblock %}
