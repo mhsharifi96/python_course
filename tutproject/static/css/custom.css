@@ -1,3 +1,7 @@
+/* * {
+    direction: rtl !important   ;
+} */
+
 .adanger{
     color: #dc3545; /* red */
 }
