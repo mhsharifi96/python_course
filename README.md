@@ -13,3 +13,11 @@
 
 ### مثال های manyTomany
 [many_to_many](https://docs.djangoproject.com/en/3.1/topics/db/examples/many_to_many/)
+
+
+
+# custom admin 
+
+[ admin site](https://docs.djangoproject.com/en/3.2/ref/contrib/admin/#django.contrib.admin.ModelAdmin.filter_vertical)
+[Admin actions](https://docs.djangoproject.com/en/3.2/ref/contrib/admin/actions/)
+
