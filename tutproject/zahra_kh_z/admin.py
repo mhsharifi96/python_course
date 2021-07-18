@@ -57,5 +57,3 @@ class BooksInstanceInline(admin.StackedInline):
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
     inlines = [BooksInstanceInline]
-
-# C:\1_venv_django\python_course-main\tutproject>..\..\my_venv_django\Scripts\activate
