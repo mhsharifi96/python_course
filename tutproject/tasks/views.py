@@ -1,9 +1,9 @@
 from django.shortcuts import  render, redirect, reverse
 from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
 from django.views import  View
-from django.views.generic import ListView
-
+from django.views.generic import ListView,TemplateView,DetailView
 from django.core.paginator import Paginator
+from pprint import pprint
 
 
 from .models import  Task
@@ -225,3 +225,36 @@ def simple(request):
         # form = simpleForm()
 
         return render(request, 'maktab51_form.html',{'form': form})
+
+
+
+
+class aboutView(TemplateView):
+    template_name="about.html"
+
+
+
+class tasksListViews(ListView):
+    model = Task
+    queryset = Task.objects.filter(title__contains = 's').order_by('-date_of_creation')
+    context_object_name = 'my_tasks'
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['book_list'] = ['book1','book2','book3']
+        pprint(context)
+        return context
+
+    
+class tasksDetailViews(DetailView):
+    # نمایش جزییات تسک ها
+    # ما میتوانیم از این کلاس جهت نمایش جزییات لیست استفاده کنیم 
+    
+    model = Task
+    # queryset = Task.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pprint(context)   
+        return context

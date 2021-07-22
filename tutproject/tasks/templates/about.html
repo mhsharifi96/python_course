@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load tags %}
+{% load static %}
+
+{% block title %} about us{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+
+    <p>this is about page </p>
+    <p>this page test for view class</p>
+  
+</div>
+
+
+<div class="text-center" style="position: fixed;bottom: 0;">
+    Made with &#x2615; and &#9829; by <strong><a href="https://www.github.com/mhsharifi96"
+            target="_blank">Virux</a></strong>
+
+    © . All rights reserved.
+</div>
+{% endblock %}
+
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+{% endblock %}

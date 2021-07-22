@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+{% for obj in my_tasks %}
+
+    <p>{{obj.title}}</p>
+
+{% endfor %}
+{% endblock content %}
+
