@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<p>
+    {{lastTime}}
+</p>
     
 {% for obj in my_tasks %}
 
     <p>{{obj.title}}</p>
+    <a href="{% url 'task-detail' obj.id %}">نمایش </a>
+
 
 {% endfor %}
+
+
 {% endblock content %}
 

@@ -34,8 +34,9 @@
   <body style=" background-image: url('/static/images/wa.png');">
 
     <div class="container">
+        <p>Hi {{ user }}!!!!</p>
         {% if user.is_authenticated %}
-          <p>Hi {{ user.email }}!</p>
+         
           <a href="{% url 'logout' %}">logout</a>
           {% else %}
           <p>You are not logged in.</p>

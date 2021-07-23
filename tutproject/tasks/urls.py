@@ -11,6 +11,7 @@ urlpatterns = [
     path('simple/', simple, name='simple_form'),
     path('about/', TemplateView.as_view(template_name="about.html"), name='about_page'),
     path('about-view/', aboutView.as_view(), name='about_page1'),
+    
     path('task-view/', tasksListViews.as_view(), name='task'),
     path('task-detail/<int:pk>/', tasksDetailViews.as_view(), name='task-detail'),
     path('', tasks, name='tasks'),

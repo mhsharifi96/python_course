@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
+# #############
+LOGIN_REDIRECT_URL = 'tasks'
+LOGOUT_REDIRECT_URL = 'login'
+##############
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
@@ -60,8 +64,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'tutproject.urls'
-LOGIN_REDIRECT_URL = 'tasks'
-LOGOUT_REDIRECT_URL = 'login'
+
 
 print(str(BASE_DIR / 'templates'))
 TEMPLATES = [
