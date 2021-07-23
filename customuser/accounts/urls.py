@@ -7,5 +7,5 @@ urlpatterns = [
     path('test/', LoginRequiredTest.as_view(), name='login-test'),
     path('simple-login/', simpleLogin, name='simple-login'),
     path('test2/', testLogin, name='testLogin'),
-    path('simple-update/<int:pk>/<str:type>', updateTestView.as_view()),
+    path('simple-update/<int:pk>/', updateTestView.as_view()),
 ]

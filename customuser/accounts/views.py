@@ -1,6 +1,8 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth import authenticate,login
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 from django.urls import reverse_lazy,reverse
@@ -10,20 +12,22 @@ from django.views.generic import CreateView,TemplateView
 from .forms import CustomUserCreationForm
 
 from django.views.generic.edit import UpdateView, DeleteView
-from django.contrib.auth.decorators import login_required
 
-
+# باخودتون
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
-
+# signup custom
+# https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sign-up-view.html
 
 def simpleLogin(request):
     if request.method == "POST" :
         print(request.POST['username'])
         print(request.POST['password'])
+        # form validator
+        # form.is_valid()
         user = authenticate(username =request.POST['username'],password = request.POST['password'] )
         if user is not None : 
             login(request,user)
@@ -35,17 +39,16 @@ def simpleLogin(request):
 
 
 
-
+# نیازمند لاگین
 class LoginRequiredTest(LoginRequiredMixin,TemplateView):
     template_name='test.html'
 
-
+# نیاز مند لاگین
 @login_required
 def testLogin(request):
 
     return render(request, 'test.html')
 
-from django.utils.html import escape
 
 
 class updateTestView(View):
@@ -54,7 +57,7 @@ class updateTestView(View):
         print(request.user)
         # پیدا کردن ایتم مورد نظر
         # test.objects.get(....)
-        return render(request, 'test.html')
+        return render(request, 'test.html',{})
     def post(self,request,*args, **kwargs):
         # دریافت درخواست
         # پاس دادن درخواست به فرم
