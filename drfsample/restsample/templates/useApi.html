@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    sample drf and use it
+{% endblock title %}
+
+{% block script %}
+$(document).ready(function () {
+    $.ajax({
+        url: "{% url 'polls'%}",
+        type: 'GET',
+        dataType: 'json', // added data type
+        success: function(res) {
+            console.log('yesssssssssss')
+            console.log(res);
+            console.log(res.poll.question);
+            $('#polls').append('<li>'+res.poll.question+'</li>')
+           
+        }
+    });
+})
+{% endblock script %}
+
+
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-12">
+                <p style="direction:rtl;text-align: right;">
+                   در صفحه میخواهیم از api های ساخته شده استفاده کنیم و حظ و بهره لازم را ببریم . 
+                </p>
+                <p style="direction:rtl;text-align: right;">
+                     خب الان صفحه لود شده ولی خالی خالیه حال باید چکار کنیم تا  api ها استفاده کنیم <br>
+                     ما باید از ajax  استفاده کنیم تا بدون اینکه صفحه رفرش بشه بتونیم محتوا رو از سرور بگیریم .
+                     خب برای اینکه از ajax  استفاده بشه ما دنبال یه ایونتی هستیم که کی این درخواست به سرور زده بشه <br>
+                     مثلا میگیم وقتی صفحه اماده شد یه درخواست بزن به سرور و داده ها رو بگیر  پس باید یه خورده js  به کدمون اضافه کنیم و  تامام 
+                    <br>
+                    چون api که نوشتیم فقط get قبول میکنه پس درخواستی که هم میفرستیم به سرور باید از نوع get  باشه و تامام 
+                    <br>
+                    حالا ما باید یه تیکه کد بزنیم برای ajax 
+                </p>
+                <pre>
+                    <code>
+                        
+                        $.ajax({
+                            url: "<api url>",
+                            type: 'GET',
+                            dataType: 'json', // added data type
+                            success: function(res) {
+                                console.log('yesssssssssss')
+                                console.log(res);
+                               
+                               
+                            }
+                        });
+                    </code>
+                </pre>
+                <p style="direction:rtl;text-align: right;">
+                     حالا وقتی کنسول رو ببینید اشک شوق در چشمانمان جمع شده و یک yesssssssssss و response برای مان چاپ شده 
+                </p>
+                <h4>polls</h4>
+                <ul id="polls"></ul>
+                <h4 style="direction:rtl;text-align: right;">تمرین</h4>
+                <p style="direction:rtl;text-align: right;">
+                   به جایی که در لود صفحه ajax زده بشه وقتی روی باتنی کلیک کردی درخواست زده بشه و پاسخ را نمایش دهید 
+                    </p>
+
+                <p style="direction:rtl;text-align: right;">
+                حالا کاری که شما باید انجام بدید همه poll ها رو دریافت کنید و در یک جدول نمایش دهید
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ توضیحات
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container">
+        <مdiv class="row">
+            <div class="col-12" style="direction:rtl">
+                <br> <br>
+                <h4>AJAX چیست ؟</h4>
+                <p>اگر به طرز کار صفحات وب توجه کنید متوجه می‌شوید که برای نمایش هر مطلب یا صفحه‌ی جدید، صفحات وب مجدداً بارگذاری (refresh) می‌شوند تا محتوای جدید را نمایش دهند.
+
+                    تکنولوژی AJAX ایجاد شده تا بدون نیاز به refresh کل صفحه، بخشی از اطلاعات صفحه بارگذاری شود. در واقع این تکنولوژی به کاربر اجازه می‌دهد بدون بارگذاری مجدد صفحه، داده‌هایی را به سرور ارسال کند تا در آنجا پردازش شوند. سپس اطلاعات را دریافت و در صفحه وب به نمایش در آورد.
+                </p>
+                <h4>نحوه‌ی کار Ajax چگونه است؟</h4>
+                <p>
+                    این کار طی چند مرحله و با ایجاد یک event (مثلا با کلیک روی یک دکمه یا لینک) آغاز می‌شود. <br>
+
+مرورگر به کمک جاوا اسکریپت یک شی از xmlhttprequest می‌سازد و به کمک اینترنت آن را به سرور ارسال می‌کند. <br>
+
+در سرور درخواست دریافت و پردازش می‌شود. سپس نتیجه‌ی آن به مرورگر بازگردانده می‌شود. <br> 
+
+مرورگر پاسخ را به کمک جاوا اسکریپت دریافت و نمایش می‌دهد.
+                </p>
+                <h4>JSON چیست ؟</h4>
+                <p>
+                    جیسون معادل اختصاری عبارت JavaScript Object Notation به معنی «نمادگذاری اشیا در جاوا اسکریپت» است. جیسون یک قالب استاندارد باز است که امکان تبادل داده‌ها در وب با استفاده از جفت‌های خصوصیت-کلید را ممکن ساخته است. این توضیح ممکن است تا حدودی پیچیده به نظر بیاید؛ پس در ادامه آن را اندکی بیشتر توضیح می‌دهیم.
+                </p>
+                <pre>
+
+                    <code style="direction:ltr">
+                        {
+                            "data": [{
+                              "type": "articles",
+                              "id": "1",
+                              "attributes": {
+                                "title": "JSON:API paints my bikeshed!",
+                                "body": "The shortest article. Ever.",
+                                "created": "2015-05-22T14:56:29.000Z",
+                                "updated": "2015-05-22T14:56:28.000Z"
+                              },
+                              "relationships": {
+                                "author": {
+                                  "data": {"id": "42", "type": "people"}
+                                }
+                              }
+                            }],
+                            "included": [
+                              {
+                                "type": "people",
+                                "id": "42",
+                                "attributes": {
+                                  "name": "John",
+                                  "age": 80,
+                                  "gender": "male"
+                                }
+                              }
+                            ]
+                          }
+                    </code>
+                </pre>
+                <h4>حال چه کنیم ؟ اینا رو بلد بودیم که ! :)</h4>
+                <p>خب تا اینجا فهمیدم  ajax چیه و json چیه ؟ <br> 
+                فهمیدم اگر بخواییم با ajax کار کنیم حتما باید یه رویدادی اتفاق بیافته 
+            منظور از رویداد همون event هست که باهاش اشنا شدید توی  js</p>
+            
+                <p> انواع رویداد هایی که  شاید برای شما هم اتفاق بیافته  :) <br>
+                آقا صفحه داره لود میشه  این یه رویداده <br>
+                وقتی روی باتن کلیک کرد <br>
+                یا حتی اگر فرمی داره ارسال میشه <br>
+                یا مثلا وقتی موس میره روی یه باتن خاص  میخواییم یه کاری کنم <br>
+                کلا رویدادددد  یا هر اتفاقی که توی  صفحه میافته 
+                </p>
+
+
+                <h4>serializer چیست ؟</h4>
+                <p>
+                    در علوم کامپیوتر و در حوزه ذخیره داده، دنباله سازی به فرایند ترجمه ساختمان داده ها یا حالت شیء به قالبی که امکان ذخیره آن وجود داشته باشد (برای مثال در یک فایل یا بافر حافظه) و بعدتر در همان کامپیوتر و یا یک کامپیوتر دیگر بتواند از نو احیا گردد، گفته می شود. وقتی دنباله های بیتی حاصل شده بر اساس قالب دنباله سازی بازخوانی شوند، می توانند برای ایجاد یک نسخه یکسان معنایی از شیء اورجینال، به کار روند. برای بسیاری از اشیاء پیچیده، برای مثال آنهایی که ارجاعات وسیعی دارند، این فرایند آسان نیست. حاصل دنباله سازی اشیاء شیء گرا شامل هیچ کدام از متدهای همبسته شان که پیش از آن به صورت جدانشدنی به هم مرتبط بوده اند، نمی شود.
+فرایند دنباله سازی یک شیء را marshaling یا با ترتیب نشان دادن نیز می گویند. عملیات مخالف این فرایند، استخراج یک ساختمان داده از دنباله ای از بایت هاست (deserialization یا unmarshalling).
+                </p>
+                <p>
+                    فرض کنید که شما در برنامه خود یک آبجکت از یک کلاس دارید که یک سری داده هم در اون آبجکت ذخیره کردید و حالا می خواهید این داده ها رو دریک فایل ذخیره کنید چه می کنید؟
+                </p>
+                <p style="direction:ltr;text-align: left;">
+                  <b>
+                    what is serializers ?
+                  </b> <br>
+                  Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into JSON, XML or other content types. Serializers also provide deserialization, allowing parsed data to be converted back into complex types, after first validating the incoming data.
+                  <br><b>Serializer class has a number of methods :</b>  <br>
+                  • A is_valid(self, ..) method which can tell if the data is sufficient and valid to create/update a model
+                  instance. <br>
+                  • A save(self, ..) method, which knows how to create or update an instance. <br>
+                  • A create(self, validated_data, ..) method which knows how to create an instance. This method
+                  can be overriden to customize the create behaviour. <br>
+                  • A update(self, instance, validated_data, ..) method which knows how to update an in- 
+                  stance. This method can be overriden to customize the update behaviour. <br>
+                </p>
+
+                <pre style="direction:ltr;text-align: left;">
+                  <code>
+                   #on Terminal 
+                    python manage.py shell
+
+                    # then import your models e.x : 
+                    # note : the models is available on ajaxsample app
+                    from ajaxsample.models import Poll
+                    # then import your serializers (class) e.x : 
+                    from restsample.serializers import PollSerializers
+
+                    data = {"question": "serializer is that work ? ","created_by": 1}
+                    poll_serializer = PollSerializers(data=data)
+                    poll_serializer # :)
+                    poll_serializer.is_valid()  # True/False
+                    poll = poll_serializer.save()
+                    poll.pk  #tells us that the object has been commited to the DB.
+
+                    # UPDATE with serializers
+                    update_data = {"question": "serializer is that work ? and what is serializers? ","created_by": 1}
+                    poll_serializer_updated = PollSerializers(instance=poll,data = update_data)
+                    poll_serializer_updated # :)
+                    poll_serializer_updated.is_valid()
+                    poll_serializer_updated_.save()
+                    Poll.objects.get(pk=5).question
+                  </code>
+                </pre>
+            </div>
+
+    </div>
+
+{% endblock content %}

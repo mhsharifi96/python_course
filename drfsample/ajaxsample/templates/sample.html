@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ مثال 
+{% endblock title %}
+
+
+{% block script %}
+    $(document).ready(function () {
+        
+
+        $("#sampleBtn").click(function(){
+            alert('click event worked !!!!!! ')
+        }); 
+        $("#sampleBtn2").click(function(){
+            alert('click event worked for btn 2 ')
+        }); 
+        $("#button-addon2").click(function(){
+            username = $('#username').val()
+            console.log(username)
+            $.post( "{%url 'ajax-sample'%}",
+                {   
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    "username":username,
+                } ,function( data ) {
+                        console.log('data received')
+                        console.log('data : ',data)
+                        console.log('message : ',data.message)
+                        $('#newData').append('<li>'+data.message+'</li>')
+                        $.each(data.polls,function(index,value){
+
+                            $('#polls').append('<li>'+value.question+'</li>')
+                        })
+                }
+
+            );
+            
+        }); 
+
+
+        
+
+        $(document).on("click",".taskRemove",function() {});
+        
+        
+        $(document).on("click","#taskSaveBtn",function() {
+
+            $.post( "",
+                {   
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                
+                    "test":"test1",
+                    "tasks":JSON.stringify(tasks),
+                } ,function( data ) {
+                        $( ".result" ).html( data);
+                }
+            );
+        })
+        
+
+    });
+{% endblock script %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <br><br><br>
+            <button id='sampleBtn' type="click"  class="btn btn-primary">کلیک</button>
+            <button id='sampleBtn2' type="click"  class="btn btn-primary">کلیک ۲</button>
+        <hr>
+        </div>
+        
+        <div class="col-12">
+            <div class="input-group mb-3">
+                <input id="username" type="text" class="form-control" placeholder="نام خود را وارد کنید" aria-label="نام خود را وارد" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2">ارسال</button>
+              </div>
+        </div>
+        <hr>
+        <ul id="newData"></ul>
+        <ul id="polls"></ul>
+    </div>
+</div>
+
+{% endblock content %}
