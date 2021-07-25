@@ -8,32 +8,69 @@
 {% block script %}
     $(document).ready(function () {
         
+        $('#maktab').click(function(){
+            console.log('hi maktab')
+            //alert('hi maktab')
+           // $('#btnSection').append('<button class="btn btn-danger">add by envent</button>')
+           console.log(this)
+           $($(this).closest('div')).append('testttt')
+        })
 
         $("#sampleBtn").click(function(){
-            alert('click event worked !!!!!! ')
+            
+            $.ajax({
+                url: "{% url 'json-sample'%}",
+                type: 'GET',
+                dataType: 'json', // added data type
+                success: function(res) {
+                    console.log(res);
+                    iziToast.show({
+                        title: 'Hey',
+                        color : 'green',
+                        message: res.message
+                    });
+                    
+                }
+            });
         }); 
         $("#sampleBtn2").click(function(){
             alert('click event worked for btn 2 ')
         }); 
         $("#button-addon2").click(function(){
-            username = $('#username').val()
-            console.log(username)
+            inputText = $('#inputText').val()
+            console.log(inputText)
+            // ajax 
             $.post( "{%url 'ajax-sample'%}",
                 {   
                     csrfmiddlewaretoken: '{{ csrf_token }}',
-                    "username":username,
-                } ,function( data ) {
-                        console.log('data received')
-                        console.log('data : ',data)
-                        console.log('message : ',data.message)
-                        $('#newData').append('<li>'+data.message+'</li>')
-                        $.each(data.polls,function(index,value){
+                    "inputText": inputText,  // دیتا در فرم وارد شده
+                   // "inputText1":'inputText1',
+                   // "inputText2":'inputText2',
+                   // "inputText3":'inputText3',
+                   // "inputText4":'inputText4',
+                    //"sampleList":[1,2,3,4,5,6], ???
+                    //"sampleObj":JSON.stringify({name:"maktab",test : "test"}),
 
+                } ,function( data ) {
+                       console.log('data : ',data)
+                       iziToast.show({
+                            title: 'Hey',
+                            color : 'green',
+                            message: data.message
+                        });
+                        $('#polls li').remove()
+                        $.each(data.polls,function(index,value){
+                            console.log('index',index)
+                            console.log('value',value)
+                            
                             $('#polls').append('<li>'+value.question+'</li>')
                         })
                 }
 
             );
+
+           
+
             
         }); 
 
@@ -65,16 +102,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12">
+        <div id = "btnSection" class="col-12">
             <br><br><br>
-            <button id='sampleBtn' type="click"  class="btn btn-primary">کلیک</button>
+            <button id='sampleBtn' type="click"  class="btn btn-warning">ساعت :)</button>
             <button id='sampleBtn2' type="click"  class="btn btn-primary">کلیک ۲</button>
+            <button id="maktab" class="btn btn-info" type="click">hi maktab</button>
         <hr>
         </div>
         
         <div class="col-12">
             <div class="input-group mb-3">
-                <input id="username" type="text" class="form-control" placeholder="نام خود را وارد کنید" aria-label="نام خود را وارد" aria-describedby="button-addon2">
+                <input id="inputText" type="text" class="form-control" placeholder="نام خود را وارد کنید" aria-label="نام خود را وارد" aria-describedby="button-addon2">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2">ارسال</button>
               </div>
         </div>
