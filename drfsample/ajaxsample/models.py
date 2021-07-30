@@ -19,3 +19,8 @@ class Choice(models.Model):
 
 class Vote(models.Model):
     choice = models.ForeignKey(Choice, related_name='votes', on_delete=models.CASCADE)
+
+
+class GroupPoll(models.Model):
+
+    polls = models.ManyToManyField(Poll)

@@ -6,14 +6,12 @@ import json
 from .models import Poll
 
 from django.views.decorators.csrf import csrf_exempt
-
+from pprint import pprint
 
 def ajaxDesc(request):
-
-
     return render(request,'index.html',{})
 
-from pprint import pprint
+
 
 # def ajaxSample(request):
 #     if request.method == 'POST':
@@ -53,7 +51,6 @@ def jsonView(request):
         'test3' : "test3",
         'testList' : [1,2,3,4],
         'testobj' : {'numbers':[1,2,3,4,5,6],'maktab':'sharif'}
-
     })
 
 
@@ -64,3 +61,8 @@ def apiSample(request):
     return JsonResponse({        
             'polls':list(polls.values())
         })
+
+
+
+def workWithApi(request):
+    return render(request,'work_api.html',{})

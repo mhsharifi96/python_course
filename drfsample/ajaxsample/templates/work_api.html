@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ کار به api 
+{% endblock title %}
+
+
+{% block script %}
+    $(document).ready(function () {
+        
+   
+
+      
+            
+            $.ajax({
+                url: "{% url 'api-polls'%}",
+                type: 'GET',
+                dataType: 'json', // added data type
+                success: function(res) {
+                    console.log(res);
+                    $.each(res.poll,function(index,value){
+                        console.log(value)
+                        $('#apitest').append('<li>'+value.question+'</li>')
+                    })
+                    
+                }
+            });
+        
+       
+        
+
+        
+
+        $(document).on("click",".taskRemove",function() {});
+        
+        
+        
+
+    });
+{% endblock script %}
+
+
+{% block content %}
+ سلام این صفحه فقط جهت نشان دادن کار با api است .
+
+<ul id='apitest'>
+
+</ul>
+
+{% endblock content %}
