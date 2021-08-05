@@ -12,6 +12,9 @@ from .serializers import PollSerializers,ChoiceSerializer,VoteSerializer,GroupPo
 
 
 from rest_framework.permissions import IsAuthenticated
+import logging
+
+logger = logging.getLogger('django')
 
 # توضیحات
 def samplepage(request):
@@ -126,3 +129,6 @@ class LoginView(APIView):
             return Response({"token": user.auth_token.key})
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
