@@ -189,8 +189,8 @@ import os
 #         }
 #     },
 # }
-
-
+from datetime import datetime
+today = datetime.today().strftime('%Y-%m-%d')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -198,7 +198,7 @@ LOGGING = {
         'file': {
             'level':'DEBUG',
             'class': 'logging.FileHandler',
-            'filename':'./logs/dajngo_now.log',
+            'filename':'./logs/log_'+today+'.log',
             'formatter': 'verbose'
         },
         'file_request': {
