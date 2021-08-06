@@ -191,45 +191,57 @@ import os
 # }
 
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'file': {
-#             'level':'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'filename':'./logs/debug.log',
-#             'formatter': 'verbose'
-#         },
-#     },
-#     'loggers':{
-#         'django':{
-#             'handlers':['file'],
-#             'level':'DEBUG',
-#             'propogate':True,
-#                 },
-#         'django.request': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#         'django.server': {
-#             'handlers': ['file'],
-#             'level': 'INFO',
-#             'propagate': False,
-#         },
-#     },
-#     'formatters': {
-#         'verbose': {
-#             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-#             'style': '{',
-#         },
-#         'simple': {
-#             'format': '{levelname} {message}',
-#             'style': '{',
-#         },
-#     }
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/dajngo_now.log',
+            'formatter': 'verbose'
+        },
+        'file_request': {
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/request_log.log',
+            'formatter': 'verbose'
+        },
+        'file_server': {
+            'level':'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename':'./logs/server_log.log',
+            'formatter': 'verbose' #simple ? :)
+        },
+    },
+    'loggers':{
+        'django':{
+            'handlers':['file'],
+            'level':'DEBUG',
+            'propogate':True,
+                },
+        'django.request': {
+            'handlers': ['file_request'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.server': {
+            'handlers': ['file_server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    }
+}
 
 
 
@@ -244,7 +256,7 @@ import os
 #         'file':{
 #             'level':'INFO',
 #             'class': 'logging.FileHandler',
-#             'filename':'./logs/debug_p.log'
+#             'filename':'./logs/debug_maktab.log'
 #         }
 #     },
 #     'root': {
@@ -257,7 +269,7 @@ import os
 #             'handlers':['file'],
 #             'level':'DEBUG',
 #             'propogate':True,
-#             
+            
 #             # 'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
 #             # 'propagate': False,
 
