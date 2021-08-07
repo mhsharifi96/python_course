@@ -151,7 +151,7 @@ The EXPOSE instruction indicates the ports on which a container listens for conn
 The VOLUME instruction should be used to expose any database storage area, configuration storage, or files/folders created by your docker container. You are strongly encouraged to use VOLUME for any mutable and/or user-serviceable parts of your image.
 
 ## WORKDIR
-The WORKDIR instruction sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile . 
+The WORKDIR instruction sets the working directory for any RUN, CMD, COPY and ADD instructions that follow it in the Dockerfile . 
 
 note : For clarity and reliability, you should always use absolute paths for your WORKDIR
 
