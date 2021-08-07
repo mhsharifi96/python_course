@@ -8,7 +8,7 @@
 The docker run command first creates a writeable container layer over the specified image, and then starts it using the specified command. That is, docker run is equivalent to the API /containers/create then /containers/(id)/start. [more](https://docs.docker.com/engine/reference/commandline/run/)
 
 ### docker ps
-List containers  e.x : `docker ps -a`
+List containers . e.x : `docker ps -a`
 * --all , -a		Show all containers (default shows just running)
 
 ### docker image
