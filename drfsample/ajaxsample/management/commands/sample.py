@@ -24,4 +24,4 @@ class Command(BaseCommand):
         #     poll.opened = False
         #     poll.save()
 
-        # self.stdout.write(self.style.SUCCESS('Successfully closed "%s"' %options['number']))
+        self.stdout.write(self.style.SUCCESS('Successfully closed "%s"' %options['number']))
