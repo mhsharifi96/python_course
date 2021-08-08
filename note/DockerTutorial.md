@@ -163,6 +163,17 @@ note : For clarity and reliability, you should always use absolute paths for you
 
 
 ## Get started with Docker Compose
+
+Compose is a tool for defining and running multi-container Docker applications.
+
+* Using Compose is basically a three-step process:
+
+* Define your app’s environment with a Dockerfile so it can be reproduced anywhere.
+
+* Define the services that make up your app in docker-compose.yml so they can be run together in an isolated environment.
+
+Run docker compose up and the Docker compose command starts and runs your entire app. You can alternatively run docker-compose up using the docker-compose binary.
+
 in this [page](https://docs.docker.com/compose/gettingstarted/) you build a simple Python web application running on Docker Compose. The application uses the Flask framework and maintains a hit counter in Redis. While the sample uses Python, the concepts demonstrated here should be understandable even if you’re not familiar with it. 
 
 
