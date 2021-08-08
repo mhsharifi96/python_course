@@ -164,8 +164,6 @@ note : For clarity and reliability, you should always use absolute paths for you
 
 ## Get started with Docker Compose
 
-Compose is a tool for defining and running multi-container Docker applications.
-
 * Using Compose is basically a three-step process:
 
 * Define your app’s environment with a Dockerfile so it can be reproduced anywhere.
